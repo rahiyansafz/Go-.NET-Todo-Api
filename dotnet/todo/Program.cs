@@ -1,33 +1,24 @@
 var builder = WebApplication.CreateBuilder(args);
-
 var app = builder.Build();
 
 app.UseHttpsRedirection();
 
 var todos = new List<Todo>
 {
-    new() {
-        Id = Guid.NewGuid(),
-        CreatedAt = DateTime.UtcNow,
-        Name = "Learn ASP.NET Core",
-        Status = false
-    },
-    new() {
-        Id = Guid.NewGuid(),
-        CreatedAt = DateTime.UtcNow,
-        Name = "Build a REST API",
-        Status = false
-    },
-    new() {
-        Id = Guid.NewGuid(),
-        CreatedAt = DateTime.UtcNow,
-        Name = "Deploy the app",
-        Status = false
-    }
+    new() { Id = Guid.NewGuid(), CreatedAt = DateTime.UtcNow, Name = "Learn ASP.NET Core", Status = false },
+    new() { Id = Guid.NewGuid(), CreatedAt = DateTime.UtcNow, Name = "Build a REST API", Status = false },
+    new() { Id = Guid.NewGuid(), CreatedAt = DateTime.UtcNow, Name = "Deploy the app", Status = false }
 };
 
-// Create
-app.MapPost("/todos", (TodoInputDto todoInputDto) =>
+app.MapPost("/todos", CreateTodo);
+app.MapGet("/todos", GetTodos);
+app.MapGet("/todos/{id}", GetTodoById);
+app.MapPut("/todos/{id}", UpdateTodo);
+app.MapDelete("/todos/{id}", DeleteTodo);
+
+app.Run();
+
+static IResult CreateTodo(TodoInputDto todoInputDto, List<Todo> todos)
 {
     var todo = new Todo
     {
@@ -38,23 +29,20 @@ app.MapPost("/todos", (TodoInputDto todoInputDto) =>
     };
     todos.Add(todo);
     return Results.Created($"/todos/{todo.Id}", todo);
-});
+}
 
-// Read (Get All)
-app.MapGet("/todos", () =>
+static IResult GetTodos(List<Todo> todos)
 {
     return Results.Ok(todos);
-});
+}
 
-// Read (Get By Id)
-app.MapGet("/todos/{id}", (Guid id) =>
+static IResult GetTodoById(Guid id, List<Todo> todos)
 {
     var todo = todos.FirstOrDefault(t => t.Id == id);
     return todo is null ? Results.NotFound() : Results.Ok(todo);
-});
+}
 
-// Update
-app.MapPut("/todos/{id}", (Guid id, TodoInputDto updatedTodoDto) =>
+static IResult UpdateTodo(Guid id, TodoInputDto updatedTodoDto, List<Todo> todos)
 {
     var todo = todos.FirstOrDefault(t => t.Id == id);
     if (todo is null) return Results.NotFound();
@@ -63,19 +51,16 @@ app.MapPut("/todos/{id}", (Guid id, TodoInputDto updatedTodoDto) =>
     todo.Status = updatedTodoDto.Status;
 
     return Results.Ok(todo);
-});
+}
 
-// Delete
-app.MapDelete("/todos/{id}", (Guid id) =>
+static IResult DeleteTodo(Guid id, List<Todo> todos)
 {
     var todo = todos.FirstOrDefault(t => t.Id == id);
     if (todo is null) return Results.NotFound();
 
     todos.Remove(todo);
     return Results.Ok();
-});
-
-app.Run();
+}
 
 public class Todo
 {

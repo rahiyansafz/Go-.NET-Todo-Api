@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Hp\\Downloads\\govsdotnet\\dotnet\\todo\\todo.csproj": {}
+    "D:\\Backup_2024_06_01\\Projects\\govsdotnet\\dotnet\\todo\\todo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Hp\\Downloads\\govsdotnet\\dotnet\\todo\\todo.csproj": {
+    "D:\\Backup_2024_06_01\\Projects\\govsdotnet\\dotnet\\todo\\todo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Hp\\Downloads\\govsdotnet\\dotnet\\todo\\todo.csproj",
+        "projectUniqueName": "D:\\Backup_2024_06_01\\Projects\\govsdotnet\\dotnet\\todo\\todo.csproj",
         "projectName": "todo",
-        "projectPath": "C:\\Users\\Hp\\Downloads\\govsdotnet\\dotnet\\todo\\todo.csproj",
+        "projectPath": "D:\\Backup_2024_06_01\\Projects\\govsdotnet\\dotnet\\todo\\todo.csproj",
         "packagesPath": "C:\\Users\\Hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Hp\\Downloads\\govsdotnet\\dotnet\\todo\\obj\\",
+        "outputPath": "D:\\Backup_2024_06_01\\Projects\\govsdotnet\\dotnet\\todo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
